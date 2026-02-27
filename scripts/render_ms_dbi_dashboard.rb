@@ -343,7 +343,11 @@ def html_template(data)
         </section>
 
         <section class="kpi-grid">
-          <div class="kpi"><div class="k">Courses</div><div class="v" id="kpiCourses">0</div></div>
+          <div class="kpi clickable" data-metric="overview" tabindex="0">
+            <div class="k">Overview</div>
+            <div class="v" id="kpiOverviewName">MS Design for Business Innovation</div>
+            <div class="hint">Click for program overview summary</div>
+          </div>
           <div class="kpi clickable" data-metric="employment_2024" tabindex="0">
             <div class="k">Employment (2024)</div>
             <div class="v" id="kpiEmployment2024">0</div>
@@ -367,7 +371,7 @@ def html_template(data)
         </section>
 
         <section class="metric-explorer">
-          <h2 id="topMetricTitle">Employment (2024) Breakdown by SOC</h2>
+          <h2 id="topMetricTitle">Overview: MS Design for Business Innovation</h2>
           <div class="subtle" id="topMetricSubtitle">Click any top metric card to open its detailed breakdown.</div>
           <div id="topMetricTable"></div>
         </section>
@@ -785,11 +789,10 @@ def html_template(data)
             return number;
           }
 
-          var cIdx, sIdx, tIdx, kpiCompetencies = 0;
+          var cIdx, sIdx, tIdx;
           for (cIdx = 0; cIdx < (DATA.courses || []).length; cIdx++) {
             var course = DATA.courses[cIdx];
             var comps = course.competencies || [];
-            kpiCompetencies += comps.length;
             for (sIdx = 0; sIdx < comps.length; sIdx++) {
               var comp = comps[sIdx];
               competencyLabel[comp.competency_id] = comp.competency_id + ' - ' + comp.name;
@@ -818,12 +821,14 @@ def html_template(data)
           }
 
           function setKpis() {
+            var program = DATA.program || {};
             var valueData = DATA.value_to_students_employers || {};
             var blsTable = valueData.bls_market_table || {};
             var totals = blsTable.totals || {};
             var salaryRows = (valueData.salary_range_table || {}).rows || [];
             var i, minSalary = 0, maxSalary = 0;
-            $('kpiCourses').innerHTML = (DATA.courses || []).length;
+            var overviewName = (program.credential_name || 'MS Design for Business Innovation').replace(/^MS in\\s+/i, 'MS ');
+            $('kpiOverviewName').innerHTML = escapeHtml(overviewName);
             $('kpiEmployment2024').innerHTML = escapeHtml(totals.employment_2024 || '0');
             $('kpiProjected2034').innerHTML = escapeHtml(totals.projected_2034 || '0');
             $('kpiAnnualOpenings').innerHTML = escapeHtml(totals.annual_openings_avg || '0');
@@ -842,6 +847,8 @@ def html_template(data)
           }
 
           function renderTopMetricTable(metric) {
+            var program = DATA.program || {};
+            var vision = DATA.program_vision || {};
             var valueData = DATA.value_to_students_employers || {};
             var blsTable = valueData.bls_market_table || {};
             var blsRows = blsTable.rows || [];
@@ -852,7 +859,31 @@ def html_template(data)
             var tableHtml = '';
             var i;
 
-            if (metric === 'salary_range') {
+            if (metric === 'overview') {
+              title = 'Overview: MS Design for Business Innovation';
+              subtitle = 'Interactive summary of the program overview, vision focus, and delivery model.';
+              var overviewName = (program.credential_name || 'MS in Design for Business Innovation').replace(/^MS in\\s+/i, 'MS ');
+              var overviewDuration = program.expected_duration_months || '';
+              var delivery = program.delivery_model || {};
+              var focusList = vision.vision_focus || [];
+              tableHtml = '<div class="overview-grid">' +
+                '<div class="box"><h3>Program Snapshot</h3><ul>' +
+                  '<li><strong>Credential:</strong> ' + escapeHtml(overviewName) + '</li>' +
+                  '<li><strong>Modality:</strong> ' + escapeHtml(program.modality || '') + '</li>' +
+                  '<li><strong>Expected duration:</strong> ' + escapeHtml(overviewDuration) + ' months</li>' +
+                '</ul></div>' +
+                '<div class="box"><h3>Delivery Model</h3><ul>' +
+                  '<li>' + escapeHtml('Assessment type: ' + (delivery.assessment_type || '')) + '</li>' +
+                  '<li>' + escapeHtml('AI environment: ' + (delivery.ai_learning_environment || '')) + '</li>' +
+                  '<li>' + escapeHtml('Support model: ' + (delivery.student_support || '')) + '</li>' +
+                '</ul></div>' +
+                '</div>' +
+                '<div class="box" style="margin-top:10px;"><h3>Vision Focus</h3><ul>';
+              for (i = 0; i < focusList.length; i++) {
+                tableHtml += '<li>' + escapeHtml(focusList[i]) + '</li>';
+              }
+              tableHtml += '</ul></div>';
+            } else if (metric === 'salary_range') {
               title = 'Salary Range Breakdown by Career';
               subtitle = 'Median annual pay by occupation with aligned career titles.';
               tableHtml = '<div class="table-wrap"><table style="min-width: 1600px;"><thead><tr>' +
