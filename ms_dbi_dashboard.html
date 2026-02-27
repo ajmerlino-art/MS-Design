@@ -151,7 +151,7 @@
     }
     .fact-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 10px;
       margin-bottom: 10px;
     }
@@ -410,31 +410,36 @@
           <div class="detail">Across aligned BLS anchor occupations</div>
         </div>
         <div class="fact-card">
+          <div class="label">Employment (2024)</div>
+          <div class="value" id="wfEmployment2024"></div>
+          <div class="detail">Across aligned BLS anchor occupations</div>
+        </div>
+        <div class="fact-card">
+          <div class="label">Projected (2034)</div>
+          <div class="value" id="wfProjected2034"></div>
+          <div class="detail">Across aligned BLS anchor occupations</div>
+        </div>
+        <div class="fact-card">
           <div class="label">Adjacent Master’s Pipeline</div>
           <div class="value" id="wfPipelineTotal"></div>
           <div class="detail">NCES annual completions in feeder fields</div>
-        </div>
-        <div class="fact-card">
-          <div class="label">Primary Audience Segments</div>
-          <div class="value" id="wfAudienceCount"></div>
-          <div class="detail">Career changers and career advancers</div>
         </div>
       </div>
 
       <div class="overview-grid">
         <div class="box">
-          <h3>Serviceable Audience Signals</h3>
+          <h3>Employment and Projection by Occupation</h3>
           <div class="table-wrap">
             <table style="min-width: 900px;">
               <thead>
                 <tr>
-                  <th>Segment</th>
-                  <th>Employed (2023)</th>
-                  <th>Indicator</th>
-                  <th>Implication</th>
+                  <th>Occupation</th>
+                  <th>Employment (2024)</th>
+                  <th>Projected (2034)</th>
+                  <th>Net change</th>
                 </tr>
               </thead>
-              <tbody id="wfAudienceRows"></tbody>
+              <tbody id="wfEmploymentRows"></tbody>
             </table>
           </div>
         </div>
@@ -891,23 +896,27 @@
       function initWorkforceAlignment() {
         var workforce = DATA.workforce_alignment || {};
         var pipeline = workforce.feeder_pipeline || {};
+        var valueData = DATA.value_to_students_employers || {};
+        var blsTable = valueData.bls_market_table || {};
+        var blsTotals = blsTable.totals || {};
         $('workforceSummary').innerHTML = escapeHtml(workforce.alignment_summary || '');
         $('wfTotalOpenings').innerHTML = escapeHtml(workforce.total_annual_openings || '');
+        $('wfEmployment2024').innerHTML = escapeHtml(blsTotals.employment_2024 || '');
+        $('wfProjected2034').innerHTML = escapeHtml(blsTotals.projected_2034 || '');
         $('wfPipelineTotal').innerHTML = escapeHtml(pipeline.total_adjacent_masters_pipeline || '');
-        $('wfAudienceCount').innerHTML = String((workforce.audience_segments || []).length || 0);
 
         var i, html = '';
-        var audienceRows = workforce.audience_segments || [];
-        for (i = 0; i < audienceRows.length; i++) {
-          var audience = audienceRows[i];
+        var employmentRows = blsTable.rows || [];
+        for (i = 0; i < employmentRows.length; i++) {
+          var row = employmentRows[i];
           html += '<tr>' +
-            '<td>' + escapeHtml(audience.segment || '') + '</td>' +
-            '<td>' + escapeHtml(audience.employed_2023 || '') + '</td>' +
-            '<td>' + escapeHtml(audience.indicator || '') + '</td>' +
-            '<td>' + escapeHtml(audience.implication || '') + '</td>' +
+            '<td>' + escapeHtml(row.bls_soc || '') + '</td>' +
+            '<td>' + escapeHtml(row.employment_2024 || '') + '</td>' +
+            '<td>' + escapeHtml(row.projected_2034 || '') + '</td>' +
+            '<td>' + escapeHtml(row.net_change || '') + '</td>' +
             '</tr>';
         }
-        $('wfAudienceRows').innerHTML = html;
+        $('wfEmploymentRows').innerHTML = html;
 
         var pipelineRows = pipeline.fields || [];
         html = '';
