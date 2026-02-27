@@ -1,0 +1,101 @@
+skill_id,skill_name,domain,course_id
+SK-DBI-001,Problem Framing Under Ambiguity,Strategy,DBI-701
+SK-DBI-002,Assumption Mapping,Strategy,DBI-701
+SK-DBI-003,Stakeholder Alignment,Leadership,DBI-701
+SK-DBI-004,System Context Mapping,Systems,DBI-701
+SK-DBI-005,Decision Criteria Definition,Strategy,DBI-701
+SK-DBI-006,Executive Memo Writing,Communication,DBI-701
+SK-DBI-007,Innovation Option Prioritization,Strategy,DBI-701
+SK-DBI-008,Human-Centered Trade-off Analysis,Design,DBI-701
+SK-DBI-009,Recommendation Logic,Communication,DBI-701
+SK-DBI-010,Executive Presentation Framing,Communication,DBI-701
+SK-DBI-011,Research Question Design,Research,DBI-702
+SK-DBI-012,Methods Selection,Research,DBI-702
+SK-DBI-013,Sampling Strategy,Research,DBI-702
+SK-DBI-014,Interview Protocol Design,Research,DBI-702
+SK-DBI-015,Survey Design Basics,Research,DBI-702
+SK-DBI-016,Data Quality Auditing,Analytics,DBI-702
+SK-DBI-017,Thematic Synthesis,Analytics,DBI-702
+SK-DBI-018,Evidence Traceability,Governance,DBI-702
+SK-DBI-019,Insight Storytelling,Communication,DBI-702
+SK-DBI-020,Decision Boundary Communication,Communication,DBI-702
+SK-DBI-021,Journey Mapping,Design,DBI-703
+SK-DBI-022,Service Blueprinting,Design,DBI-703
+SK-DBI-023,Touchpoint Gap Analysis,Systems,DBI-703
+SK-DBI-024,Failure-Point Identification,Systems,DBI-703
+SK-DBI-025,Prototype Fidelity Selection,Design,DBI-703
+SK-DBI-026,Prototype Evaluation Design,Research,DBI-703
+SK-DBI-027,Accessibility Evaluation,Design,DBI-703
+SK-DBI-028,Implementation Dependency Mapping,Operations,DBI-703
+SK-DBI-029,Operational Readiness Planning,Operations,DBI-703
+SK-DBI-030,Portfolio Case Narrative,Communication,DBI-703
+SK-DBI-031,Agent Opportunity Identification,AI,DBI-704
+SK-DBI-032,Business Case Scoping for AI,AI,DBI-704
+SK-DBI-033,Agent Role Definition,AI,DBI-704
+SK-DBI-034,Prompt Architecture,AI,DBI-704
+SK-DBI-035,Context Packaging,AI,DBI-704
+SK-DBI-036,Human-in-the-Loop Control Design,Governance,DBI-704
+SK-DBI-037,Responsible AI Risk Mapping,Governance,DBI-704
+SK-DBI-038,Policy Translation for Agent Workflows,Governance,DBI-704
+SK-DBI-039,Agent Readiness Gates,Operations,DBI-704
+SK-DBI-040,AI Opportunity Narrative,Communication,DBI-704
+SK-DBI-041,Multi-Agent Workflow Orchestration,AI,DBI-705
+SK-DBI-042,Agent Handoff Design,AI,DBI-705
+SK-DBI-043,Exception and Escalation Design,Governance,DBI-705
+SK-DBI-044,Prompt Iteration Testing,AI,DBI-705
+SK-DBI-045,Reliability Test Harness Design,AI,DBI-705
+SK-DBI-046,Baseline KPI Definition,Analytics,DBI-705
+SK-DBI-047,Pilot KPI Interpretation,Analytics,DBI-705
+SK-DBI-048,Adoption Planning,Change,DBI-705
+SK-DBI-049,Stakeholder Enablement,Leadership,DBI-705
+SK-DBI-050,Pilot Recommendation Writing,Communication,DBI-705
+SK-DBI-051,Agent Portfolio Integration,AI,DBI-706
+SK-DBI-052,Governance Model Design,Governance,DBI-706
+SK-DBI-053,Policy Workflow Design,Governance,DBI-706
+SK-DBI-054,Risk Ownership Mapping,Governance,DBI-706
+SK-DBI-055,Value Realization Modeling,Finance,DBI-706
+SK-DBI-056,ROI Narrative,Finance,DBI-706
+SK-DBI-057,Implementation Roadmapping,Operations,DBI-706
+SK-DBI-058,Executive Storyline Development,Communication,DBI-706
+SK-DBI-059,Objection Handling and Defense,Leadership,DBI-706
+SK-DBI-060,Capstone Evidence Synthesis,Research,DBI-706
+SK-DBI-061,Design Operations Architecture,Operations,DBI-707
+SK-DBI-062,RACI and Role Clarity,Leadership,DBI-707
+SK-DBI-063,Governance Cadence Design,Governance,DBI-707
+SK-DBI-064,Escalation Pathway Design,Governance,DBI-707
+SK-DBI-065,Cross-Functional Facilitation,Leadership,DBI-707
+SK-DBI-066,Decision Workshop Design,Leadership,DBI-707
+SK-DBI-067,Dependency Sequencing,Operations,DBI-707
+SK-DBI-068,Delivery Risk Prioritization,Risk,DBI-707
+SK-DBI-069,Leadership Status Communication,Communication,DBI-707
+SK-DBI-070,Execution Readiness Governance,Operations,DBI-707
+SK-DBI-071,Portfolio Opportunity Framing,Strategy,DBI-708
+SK-DBI-072,Portfolio Prioritization,Strategy,DBI-708
+SK-DBI-073,Fit-Feasibility Scoring,Analytics,DBI-708
+SK-DBI-074,Scenario Planning,Strategy,DBI-708
+SK-DBI-075,Trade-off Modeling,Strategy,DBI-708
+SK-DBI-076,Sensitivity Analysis,Finance,DBI-708
+SK-DBI-077,Value Realization Planning,Finance,DBI-708
+SK-DBI-078,KPI Ownership Design,Operations,DBI-708
+SK-DBI-079,Portfolio Governance Chartering,Governance,DBI-708
+SK-DBI-080,Executive Portfolio Communication,Communication,DBI-708
+SK-DBI-081,Applied Project Scoping,Operations,DBI-709
+SK-DBI-082,Outcome Contracting,Leadership,DBI-709
+SK-DBI-083,Milestone Planning,Operations,DBI-709
+SK-DBI-084,Critique Integration,Design,DBI-709
+SK-DBI-085,Artifact Quality Calibration,Design,DBI-709
+SK-DBI-086,Decision Trace Logging,Governance,DBI-709
+SK-DBI-087,Iteration Documentation,Research,DBI-709
+SK-DBI-088,Implementation Handoff Design,Operations,DBI-709
+SK-DBI-089,Stakeholder Delivery Communication,Communication,DBI-709
+SK-DBI-090,Applied Project Evidence Packaging,Research,DBI-709
+SK-DBI-091,Portfolio Arc Architecture,Communication,DBI-710
+SK-DBI-092,Evidence Curation,Research,DBI-710
+SK-DBI-093,Executive Recommendation Framing,Communication,DBI-710
+SK-DBI-094,Objection Response Design,Leadership,DBI-710
+SK-DBI-095,Implementation Readiness Narrative,Operations,DBI-710
+SK-DBI-096,Risk and Change Positioning,Risk,DBI-710
+SK-DBI-097,Employer-Facing Case Packaging,Communication,DBI-710
+SK-DBI-098,Role-Aligned Portfolio Positioning,Leadership,DBI-710
+SK-DBI-099,Defense Simulation Practice,Leadership,DBI-710
+SK-DBI-100,Capstone Narrative Synthesis,Communication,DBI-710
