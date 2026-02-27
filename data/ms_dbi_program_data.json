@@ -2772,7 +2772,108 @@
       "Value to Students & Employers",
       "Economic Opportunity",
       "Workforce Alignment"
-    ]
+    ],
+    "bls_market_table": {
+      "rows": [
+        {
+          "bls_soc": "Web and Digital Interface Designers (15-1255)",
+          "career_titles": "Service Designer, Experience Designer, CX Designer, UX Designer, Product Designer, Information Architect, Accessibility and Inclusive Design Specialist",
+          "employment_2024": "128,900",
+          "projected_2034": "137,900",
+          "net_change": "9,000",
+          "growth_2024_2034": "7.0%",
+          "annual_openings_avg": "9,100"
+        },
+        {
+          "bls_soc": "Market Research Analysts and Marketing Specialists (13-1161)",
+          "career_titles": "UX Researcher, Design Researcher, Customer Insights Lead, Experience Analytics Lead, Market Research Analyst",
+          "employment_2024": "941,700",
+          "projected_2034": "1,004,700",
+          "net_change": "63,000",
+          "growth_2024_2034": "6.7%",
+          "annual_openings_avg": "87,200"
+        },
+        {
+          "bls_soc": "Management Analysts (13-1111)",
+          "career_titles": "Design Strategist, Innovation Strategist, UX Strategist, Experience Strategist, Systems Designer, Foresight Strategist, Service Design Consultant",
+          "employment_2024": "1,075,100",
+          "projected_2034": "1,169,700",
+          "net_change": "94,600",
+          "growth_2024_2034": "8.8%",
+          "annual_openings_avg": "98,100"
+        },
+        {
+          "bls_soc": "Marketing Managers (11-2021)",
+          "career_titles": "Customer Journey Manager, Product and Service Innovation Manager",
+          "employment_2024": "407,000",
+          "projected_2034": "433,700",
+          "net_change": "26,700",
+          "growth_2024_2034": "6.6%",
+          "annual_openings_avg": "34,300"
+        },
+        {
+          "bls_soc": "Project Management Specialists (13-1082)",
+          "career_titles": "Design Program Manager, Design Operations Manager, Project Manager, Experience Delivery Lead",
+          "employment_2024": "1,046,300",
+          "projected_2034": "1,105,000",
+          "net_change": "58,700",
+          "growth_2024_2034": "5.6%",
+          "annual_openings_avg": "78,200"
+        },
+        {
+          "bls_soc": "Writers and Authors (27-3043)",
+          "career_titles": "Content Strategist, UX Content Strategist",
+          "employment_2024": "135,400",
+          "projected_2034": "140,300",
+          "net_change": "4,900",
+          "growth_2024_2034": "3.6%",
+          "annual_openings_avg": "13,400"
+        },
+        {
+          "bls_soc": "Meeting, Convention, and Event Planners (13-1121)",
+          "career_titles": "Event Experience Producer, Meeting, Convention, and Event Planner",
+          "employment_2024": "155,800",
+          "projected_2034": "163,300",
+          "net_change": "7,500",
+          "growth_2024_2034": "4.8%",
+          "annual_openings_avg": "15,500"
+        },
+        {
+          "bls_soc": "Lodging Managers (11-9081)",
+          "career_titles": "Venue or Guest Experience Manager, Lodging Manager, Guest Services Manager",
+          "employment_2024": "52,000",
+          "projected_2034": "53,800",
+          "net_change": "1,800",
+          "growth_2024_2034": "3.4%",
+          "annual_openings_avg": "5,400"
+        },
+        {
+          "bls_soc": "Commercial and Industrial Designers (27-1021)",
+          "career_titles": "Industrial Designer, Product Designer (Physical Products), Product Design Engineer, Product Development Engineer, Commercial Designer, Sign Designer, Furniture Designer",
+          "employment_2024": "30,600",
+          "projected_2034": "31,600",
+          "net_change": "1,000",
+          "growth_2024_2034": "3.2%",
+          "annual_openings_avg": "2,500"
+        },
+        {
+          "bls_soc": "Art Directors (27-1011)",
+          "career_titles": "Art Director, Creative Director, Design Director. Product Design Director, Creative Services Director, Creative Services Manager, Creative Manager, Graphic Design and Art Production Manager, Presentation Director, Art Supervisor",
+          "employment_2024": "135,000",
+          "projected_2034": "140,700",
+          "net_change": "5,700",
+          "growth_2024_2034": "4.2%",
+          "annual_openings_avg": "12,300"
+        }
+      ],
+      "totals": {
+        "employment_2024": "4,107,800",
+        "projected_2034": "4,380,700",
+        "net_change": "272,900",
+        "growth_2024_2034": "6.6%",
+        "annual_openings_avg": "356,000"
+      }
+    }
   },
   "workforce_alignment": {
     "alignment_summary": "Workforce alignment is anchored to large BLS occupational families and adjacent NCES feeder pipelines, supporting both career changers and career advancers.",

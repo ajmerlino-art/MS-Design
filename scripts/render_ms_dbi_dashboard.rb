@@ -263,6 +263,10 @@ def html_template(data)
           font-size: 0.88rem;
           line-height: 1.35;
         }
+        tfoot td {
+          font-weight: 700;
+          background: #f1f8f5;
+        }
         tr:hover td { background: #f6faf8; }
         a { color: #0f766e; text-decoration: none; }
         a:hover { text-decoration: underline; }
@@ -388,15 +392,27 @@ def html_template(data)
               <ul id="employerValueList"></ul>
             </div>
           </div>
-          <div class="overview-grid" style="margin-top: 10px;">
-            <div class="box">
-              <h3>Labor Signal Summary</h3>
-              <div class="market-list" id="valueSignalList"></div>
-            </div>
-            <div class="box">
-              <h3>Program Differentiation</h3>
-              <ul id="valueDiffList"></ul>
-            </div>
+          <div class="box" style="margin-top: 10px;">
+            <h3>Program Differentiation</h3>
+            <ul id="valueDiffList"></ul>
+          </div>
+          <h2 style="margin-top: 12px;">BLS Occupational Demand Table</h2>
+          <div class="table-wrap">
+            <table style="min-width: 1800px;">
+              <thead>
+                <tr>
+                  <th>BLS (SOC)</th>
+                  <th>Career Titles</th>
+                  <th>Employment (2024)</th>
+                  <th>Projected (2034)</th>
+                  <th>Net change</th>
+                  <th>Growth (2024-2034)</th>
+                  <th>Annual openings (avg)</th>
+                </tr>
+              </thead>
+              <tbody id="valueBlsRows"></tbody>
+              <tfoot id="valueBlsTotals"></tfoot>
+            </table>
           </div>
         </section>
 
@@ -672,7 +688,7 @@ def html_template(data)
                 program: { delivery_model: {}, value_proposition: [] },
                 program_vision: { vision_focus: [], signature_elements: [] },
                 student_experience_vision: { design_principles: [], studio_modes: [], capstone_pathways: [], support_ecosystem: [] },
-                value_to_students_employers: { student_value: [], employer_value: [], differentiation: [], labor_signal_summary: [] },
+                value_to_students_employers: { student_value: [], employer_value: [], differentiation: [], labor_signal_summary: [], bls_market_table: { rows: [], totals: {} } },
                 workforce_alignment: { audience_segments: [], feeder_pipeline: { fields: [] }, occupation_anchors: [] }
               };
             }
@@ -688,7 +704,7 @@ def html_template(data)
                 program: { delivery_model: {}, value_proposition: [] },
                 program_vision: { vision_focus: [], signature_elements: [] },
                 student_experience_vision: { design_principles: [], studio_modes: [], capstone_pathways: [], support_ecosystem: [] },
-                value_to_students_employers: { student_value: [], employer_value: [], differentiation: [], labor_signal_summary: [] },
+                value_to_students_employers: { student_value: [], employer_value: [], differentiation: [], labor_signal_summary: [], bls_market_table: { rows: [], totals: {} } },
                 workforce_alignment: { audience_segments: [], feeder_pipeline: { fields: [] }, occupation_anchors: [] },
                 _error: String(err && err.message ? err.message : err)
               };
@@ -852,24 +868,40 @@ def html_template(data)
             }
             $('employerValueList').innerHTML = html;
 
-            var laborSignals = valueData.labor_signal_summary || [];
-            html = '';
-            for (i = 0; i < laborSignals.length; i++) {
-              var signal = laborSignals[i];
-              html += '<div class="market-item">' +
-                '<div class="theme">' + escapeHtml(signal.signal || '') + '</div>' +
-                '<div style="margin-bottom:6px;"><strong>' + escapeHtml(signal.value || '') + '</strong></div>' +
-                '<div class="subtle" style="margin:0;">' + escapeHtml(signal.context || '') + '</div>' +
-                '</div>';
-            }
-            $('valueSignalList').innerHTML = html;
-
             var differentiators = valueData.differentiation || [];
             html = '';
             for (i = 0; i < differentiators.length; i++) {
               html += '<li>' + escapeHtml(differentiators[i]) + '</li>';
             }
             $('valueDiffList').innerHTML = html;
+
+            var blsTable = valueData.bls_market_table || {};
+            var rows = blsTable.rows || [];
+            html = '';
+            for (i = 0; i < rows.length; i++) {
+              var row = rows[i];
+              html += '<tr>' +
+                '<td>' + escapeHtml(row.bls_soc || '') + '</td>' +
+                '<td>' + escapeHtml(row.career_titles || '') + '</td>' +
+                '<td>' + escapeHtml(row.employment_2024 || '') + '</td>' +
+                '<td>' + escapeHtml(row.projected_2034 || '') + '</td>' +
+                '<td>' + escapeHtml(row.net_change || '') + '</td>' +
+                '<td>' + escapeHtml(row.growth_2024_2034 || '') + '</td>' +
+                '<td>' + escapeHtml(row.annual_openings_avg || '') + '</td>' +
+                '</tr>';
+            }
+            $('valueBlsRows').innerHTML = html;
+
+            var totals = blsTable.totals || {};
+            $('valueBlsTotals').innerHTML = '<tr>' +
+              '<td>Totals</td>' +
+              '<td></td>' +
+              '<td>' + escapeHtml(totals.employment_2024 || '') + '</td>' +
+              '<td>' + escapeHtml(totals.projected_2034 || '') + '</td>' +
+              '<td>' + escapeHtml(totals.net_change || '') + '</td>' +
+              '<td>' + escapeHtml(totals.growth_2024_2034 || '') + '</td>' +
+              '<td>' + escapeHtml(totals.annual_openings_avg || '') + '</td>' +
+              '</tr>';
           }
 
           function initWorkforceAlignment() {
