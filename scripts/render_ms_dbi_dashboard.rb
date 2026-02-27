@@ -76,6 +76,20 @@ def html_template(data)
           border-radius: 12px;
           padding: 10px 12px;
         }
+        .kpi.clickable {
+          cursor: pointer;
+          transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+        }
+        .kpi.clickable:hover {
+          border-color: #8fc6bd;
+          box-shadow: 0 4px 14px rgba(15, 118, 110, 0.15);
+          transform: translateY(-1px);
+        }
+        .kpi.clickable.active {
+          border-color: var(--accent);
+          box-shadow: 0 6px 16px rgba(15, 118, 110, 0.2);
+          background: #ecf8f5;
+        }
         .kpi .k {
           font-size: 0.78rem;
           color: var(--muted);
@@ -86,6 +100,23 @@ def html_template(data)
           margin-top: 3px;
           font-size: 1.3rem;
           font-weight: 700;
+          color: var(--accent-3);
+        }
+        .kpi .hint {
+          margin-top: 4px;
+          font-size: 0.76rem;
+          color: var(--muted);
+        }
+        .metric-explorer {
+          margin-top: 10px;
+          border: 1px solid var(--line);
+          border-radius: 14px;
+          background: #f9fcfb;
+          padding: 12px;
+        }
+        .metric-explorer h2 {
+          margin: 0 0 6px;
+          font-size: 1rem;
           color: var(--accent-3);
         }
         .tabs {
@@ -313,10 +344,32 @@ def html_template(data)
 
         <section class="kpi-grid">
           <div class="kpi"><div class="k">Courses</div><div class="v" id="kpiCourses">0</div></div>
-          <div class="kpi"><div class="k">Total Competencies</div><div class="v" id="kpiCompetencies">0</div></div>
-          <div class="kpi"><div class="k">Skills Library</div><div class="v" id="kpiSkills">0</div></div>
-          <div class="kpi"><div class="k">Program Tasks</div><div class="v" id="kpiTasks">0</div></div>
-          <div class="kpi"><div class="k">Embedded Cert Courses</div><div class="v" id="kpiCertCourses">0</div></div>
+          <div class="kpi clickable" data-metric="employment_2024" tabindex="0">
+            <div class="k">Employment (2024)</div>
+            <div class="v" id="kpiEmployment2024">0</div>
+            <div class="hint">Click for SOC breakdown</div>
+          </div>
+          <div class="kpi clickable" data-metric="salary_range" tabindex="0">
+            <div class="k">Salary Range</div>
+            <div class="v" id="kpiSalaryRange">$0-$0</div>
+            <div class="hint">Click for career breakdown</div>
+          </div>
+          <div class="kpi clickable" data-metric="projected_2034" tabindex="0">
+            <div class="k">Projected (2034)</div>
+            <div class="v" id="kpiProjected2034">0</div>
+            <div class="hint">Click for SOC breakdown</div>
+          </div>
+          <div class="kpi clickable" data-metric="annual_openings" tabindex="0">
+            <div class="k">Annual Openings (Avg)</div>
+            <div class="v" id="kpiAnnualOpenings">0</div>
+            <div class="hint">Click for SOC breakdown</div>
+          </div>
+        </section>
+
+        <section class="metric-explorer">
+          <h2 id="topMetricTitle">Employment (2024) Breakdown by SOC</h2>
+          <div class="subtle" id="topMetricSubtitle">Click any top metric card to open its detailed breakdown.</div>
+          <div id="topMetricTable"></div>
         </section>
 
         <section class="tabs">
@@ -693,7 +746,7 @@ def html_template(data)
                 program: { delivery_model: {}, value_proposition: [] },
                 program_vision: { vision_focus: [], signature_elements: [] },
                 student_experience_vision: { design_principles: [], studio_modes: [], capstone_pathways: [], support_ecosystem: [] },
-                value_to_students_employers: { student_value: [], employer_value: [], differentiation: [], labor_signal_summary: [], bls_market_table: { rows: [], totals: {} } },
+                value_to_students_employers: { student_value: [], employer_value: [], differentiation: [], labor_signal_summary: [], bls_market_table: { rows: [], totals: {} }, salary_range_table: { rows: [] } },
                 workforce_alignment: { audience_segments: [], feeder_pipeline: { fields: [] }, occupation_anchors: [] }
               };
             }
@@ -709,7 +762,7 @@ def html_template(data)
                 program: { delivery_model: {}, value_proposition: [] },
                 program_vision: { vision_focus: [], signature_elements: [] },
                 student_experience_vision: { design_principles: [], studio_modes: [], capstone_pathways: [], support_ecosystem: [] },
-                value_to_students_employers: { student_value: [], employer_value: [], differentiation: [], labor_signal_summary: [], bls_market_table: { rows: [], totals: {} } },
+                value_to_students_employers: { student_value: [], employer_value: [], differentiation: [], labor_signal_summary: [], bls_market_table: { rows: [], totals: {} }, salary_range_table: { rows: [] } },
                 workforce_alignment: { audience_segments: [], feeder_pipeline: { fields: [] }, occupation_anchors: [] },
                 _error: String(err && err.message ? err.message : err)
               };
@@ -723,6 +776,13 @@ def html_template(data)
           function getEmbeddedCertificate() {
             var program = DATA.program || {};
             return program.embedded_certificate || {};
+          }
+
+          function parseNumber(value) {
+            var cleaned = String(value || '').replace(/[^0-9.-]/g, '');
+            var number = Number(cleaned);
+            if (isNaN(number)) return 0;
+            return number;
           }
 
           var cIdx, sIdx, tIdx, kpiCompetencies = 0;
@@ -758,12 +818,126 @@ def html_template(data)
           }
 
           function setKpis() {
-            var embeddedCert = getEmbeddedCertificate();
+            var valueData = DATA.value_to_students_employers || {};
+            var blsTable = valueData.bls_market_table || {};
+            var totals = blsTable.totals || {};
+            var salaryRows = (valueData.salary_range_table || {}).rows || [];
+            var i, minSalary = 0, maxSalary = 0;
             $('kpiCourses').innerHTML = (DATA.courses || []).length;
-            $('kpiCompetencies').innerHTML = kpiCompetencies;
-            $('kpiSkills').innerHTML = (DATA.skills_library || []).length;
-            $('kpiTasks').innerHTML = courseTaskRows.length;
-            $('kpiCertCourses').innerHTML = (embeddedCert.certificate_courses || []).length;
+            $('kpiEmployment2024').innerHTML = escapeHtml(totals.employment_2024 || '0');
+            $('kpiProjected2034').innerHTML = escapeHtml(totals.projected_2034 || '0');
+            $('kpiAnnualOpenings').innerHTML = escapeHtml(totals.annual_openings_avg || '0');
+
+            for (i = 0; i < salaryRows.length; i++) {
+              var pay = parseNumber(salaryRows[i].median_annual_pay);
+              if (!pay) continue;
+              if (!minSalary || pay < minSalary) minSalary = pay;
+              if (!maxSalary || pay > maxSalary) maxSalary = pay;
+            }
+            if (minSalary && maxSalary) {
+              $('kpiSalaryRange').innerHTML = '$' + minSalary.toLocaleString() + '-$' + maxSalary.toLocaleString();
+            } else {
+              $('kpiSalaryRange').innerHTML = 'N/A';
+            }
+          }
+
+          function renderTopMetricTable(metric) {
+            var valueData = DATA.value_to_students_employers || {};
+            var blsTable = valueData.bls_market_table || {};
+            var blsRows = blsTable.rows || [];
+            var blsTotals = blsTable.totals || {};
+            var salaryRows = (valueData.salary_range_table || {}).rows || [];
+            var title = '';
+            var subtitle = '';
+            var tableHtml = '';
+            var i;
+
+            if (metric === 'salary_range') {
+              title = 'Salary Range Breakdown by Career';
+              subtitle = 'Median annual pay by occupation with aligned career titles.';
+              tableHtml = '<div class="table-wrap"><table style="min-width: 1600px;"><thead><tr>' +
+                '<th>Pay Band</th><th>BLS (SOC)</th><th>Median annual pay</th><th>Career titles</th>' +
+                '</tr></thead><tbody>';
+              for (i = 0; i < salaryRows.length; i++) {
+                var salary = salaryRows[i];
+                tableHtml += '<tr>' +
+                  '<td>' + escapeHtml(salary.pay_band || '') + '</td>' +
+                  '<td>' + escapeHtml(salary.bls_soc || '') + '</td>' +
+                  '<td>' + escapeHtml(salary.median_annual_pay || '') + '</td>' +
+                  '<td>' + escapeHtml(salary.career_titles || '') + '</td>' +
+                  '</tr>';
+              }
+              tableHtml += '</tbody></table></div>';
+            } else if (metric === 'projected_2034') {
+              title = 'Projected Employment (2034) Breakdown by SOC';
+              subtitle = 'Projected 2034 employment across aligned BLS occupational anchors.';
+              tableHtml = '<div class="table-wrap"><table><thead><tr>' +
+                '<th>BLS (SOC)</th><th>Projected (2034)</th>' +
+                '</tr></thead><tbody>';
+              for (i = 0; i < blsRows.length; i++) {
+                tableHtml += '<tr>' +
+                  '<td>' + escapeHtml(blsRows[i].bls_soc || '') + '</td>' +
+                  '<td>' + escapeHtml(blsRows[i].projected_2034 || '') + '</td>' +
+                  '</tr>';
+              }
+              tableHtml += '</tbody><tfoot><tr><td>Total</td><td>' + escapeHtml(blsTotals.projected_2034 || '') + '</td></tr></tfoot></table></div>';
+            } else if (metric === 'annual_openings') {
+              title = 'Annual Openings Breakdown by SOC';
+              subtitle = 'Average annual openings across aligned BLS occupational anchors.';
+              tableHtml = '<div class="table-wrap"><table><thead><tr>' +
+                '<th>BLS (SOC)</th><th>Annual openings (avg)</th>' +
+                '</tr></thead><tbody>';
+              for (i = 0; i < blsRows.length; i++) {
+                tableHtml += '<tr>' +
+                  '<td>' + escapeHtml(blsRows[i].bls_soc || '') + '</td>' +
+                  '<td>' + escapeHtml(blsRows[i].annual_openings_avg || '') + '</td>' +
+                  '</tr>';
+              }
+              tableHtml += '</tbody><tfoot><tr><td>Total</td><td>' + escapeHtml(blsTotals.annual_openings_avg || '') + '</td></tr></tfoot></table></div>';
+            } else {
+              title = 'Employment (2024) Breakdown by SOC';
+              subtitle = 'Employment baseline by BLS occupational anchor aligned to the program.';
+              tableHtml = '<div class="table-wrap"><table><thead><tr>' +
+                '<th>BLS (SOC)</th><th>Employment (2024)</th>' +
+                '</tr></thead><tbody>';
+              for (i = 0; i < blsRows.length; i++) {
+                tableHtml += '<tr>' +
+                  '<td>' + escapeHtml(blsRows[i].bls_soc || '') + '</td>' +
+                  '<td>' + escapeHtml(blsRows[i].employment_2024 || '') + '</td>' +
+                  '</tr>';
+              }
+              tableHtml += '</tbody><tfoot><tr><td>Total</td><td>' + escapeHtml(blsTotals.employment_2024 || '') + '</td></tr></tfoot></table></div>';
+            }
+
+            $('topMetricTitle').innerHTML = escapeHtml(title);
+            $('topMetricSubtitle').innerHTML = escapeHtml(subtitle);
+            $('topMetricTable').innerHTML = tableHtml;
+          }
+
+          function initTopMetricDashboard() {
+            var cards = document.querySelectorAll('.kpi.clickable');
+            var i;
+            for (i = 0; i < cards.length; i++) {
+              (function (card) {
+                function activateCard() {
+                  var j;
+                  for (j = 0; j < cards.length; j++) removeClass(cards[j], 'active');
+                  addClass(card, 'active');
+                  renderTopMetricTable(card.getAttribute('data-metric'));
+                }
+                card.addEventListener('click', activateCard);
+                card.addEventListener('keydown', function (event) {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    activateCard();
+                  }
+                });
+              })(cards[i]);
+            }
+            if (cards.length > 0) {
+              addClass(cards[0], 'active');
+              renderTopMetricTable(cards[0].getAttribute('data-metric'));
+            }
           }
 
           function buildSourceMap() {
@@ -1219,6 +1393,7 @@ def html_template(data)
 
           try {
             setKpis();
+            initTopMetricDashboard();
             initTabs();
             initOverview();
             initStudentVision();

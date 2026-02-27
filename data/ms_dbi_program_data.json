@@ -2873,6 +2873,64 @@
         "growth_2024_2034": "6.6%",
         "annual_openings_avg": "356,000"
       }
+    },
+    "salary_range_table": {
+      "rows": [
+        {
+          "pay_band": "High",
+          "bls_soc": "Marketing Managers (11-2021)",
+          "median_annual_pay": "$161,030",
+          "career_titles": "Customer Journey Manager, Product and Service Innovation Manager"
+        },
+        {
+          "pay_band": "High",
+          "bls_soc": "Art Directors (27-1011)",
+          "median_annual_pay": "$111,040",
+          "career_titles": "Art Director, Art Supervisor, Creative Director, Creative Manager, Creative Services Director, Creative Services Manager, Design Director, Graphic Design and Art Production Manager, Presentation Director"
+        },
+        {
+          "pay_band": "High",
+          "bls_soc": "Management Analysts (13-1111)",
+          "median_annual_pay": "$101,190",
+          "career_titles": "Design Strategist, Innovation Strategist, UX Strategist, Experience Strategist, Systems Designer (service systems), Foresight Strategist, Service Design Consultant"
+        },
+        {
+          "pay_band": "High",
+          "bls_soc": "Project Management Specialists (13-1082)",
+          "median_annual_pay": "$100,750",
+          "career_titles": "Design Program Manager, Design Operations Manager, Project Manager, Experience Delivery Lead"
+        },
+        {
+          "pay_band": "Mid",
+          "bls_soc": "Web and Digital Interface Designers (15-1255)",
+          "median_annual_pay": "$98,090",
+          "career_titles": "Service Designer, Experience Designer, CX Designer, UX Designer, Product Designer, Information Architect, Accessibility and Inclusive Design Specialist"
+        },
+        {
+          "pay_band": "Mid",
+          "bls_soc": "Industrial Designers (27-1021)",
+          "median_annual_pay": "$79,450",
+          "career_titles": "Design Engineer, Industrial Designer, Product Designer, Product Development Engineer, Sign Designer, Mechanical Designer"
+        },
+        {
+          "pay_band": "Mid",
+          "bls_soc": "Market Research Analysts (13-1161)",
+          "median_annual_pay": "$76,950",
+          "career_titles": "UX Researcher, Design Researcher, Customer Insights Lead, Experience Analytics Lead, Market Research Analyst"
+        },
+        {
+          "pay_band": "Mid",
+          "bls_soc": "Writers and Authors (27-3043)",
+          "median_annual_pay": "$72,270",
+          "career_titles": "Content Strategist, UX Content Strategist"
+        },
+        {
+          "pay_band": "Low",
+          "bls_soc": "Lodging Managers (11-9081)",
+          "median_annual_pay": "$68,130",
+          "career_titles": "Venue or Guest Experience Manager, Lodging Manager, Guest Services Manager"
+        }
+      ]
     }
   },
   "workforce_alignment": {
