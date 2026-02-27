@@ -41,10 +41,85 @@ def html_template(data)
             radial-gradient(circle at 0% 100%, #f5eadf 0%, transparent 38%),
             var(--bg);
         }
+        .skip-link {
+          position: absolute;
+          left: 10px;
+          top: -44px;
+          padding: 8px 12px;
+          border-radius: 8px;
+          background: var(--accent-3);
+          color: #fff;
+          font-weight: 600;
+          z-index: 1000;
+        }
+        .skip-link:focus {
+          top: 10px;
+        }
         .wrap {
-          max-width: 1600px;
+          max-width: 1880px;
           margin: 0 auto;
-          padding: 20px;
+          padding: 16px;
+        }
+        .app-layout {
+          display: grid;
+          grid-template-columns: 300px minmax(0, 1fr);
+          gap: 14px;
+          align-items: start;
+        }
+        .nav-rail {
+          position: sticky;
+          top: 14px;
+          border: 1px solid var(--line);
+          border-radius: 14px;
+          background: var(--surface);
+          padding: 14px;
+          box-shadow: 0 10px 24px rgba(21, 60, 56, 0.06);
+        }
+        .nav-title {
+          margin: 0;
+          font-size: 1.05rem;
+          color: var(--accent-3);
+        }
+        .nav-copy {
+          margin: 6px 0 0;
+          font-size: 0.86rem;
+          color: var(--muted);
+          line-height: 1.35;
+        }
+        .nav-group {
+          margin-top: 14px;
+          border-top: 1px solid var(--line);
+          padding-top: 12px;
+        }
+        .nav-group:first-of-type {
+          margin-top: 10px;
+        }
+        .nav-section-title {
+          margin: 0 0 8px;
+          font-size: 0.76rem;
+          color: var(--muted);
+          text-transform: uppercase;
+          letter-spacing: 0.6px;
+        }
+        .quick-links {
+          display: grid;
+          gap: 7px;
+        }
+        .quick-link {
+          border: 1px solid var(--line);
+          background: #f8fcfb;
+          border-radius: 8px;
+          padding: 8px 10px;
+          font-size: 0.84rem;
+          color: var(--accent-3);
+          font-weight: 600;
+        }
+        .quick-link:hover {
+          background: #eef9f6;
+          text-decoration: none;
+        }
+        .main-stage {
+          min-width: 0;
         }
         .hero {
           border-radius: 16px;
@@ -68,7 +143,7 @@ def html_template(data)
           margin-top: 14px;
           display: grid;
           gap: 10px;
-          grid-template-columns: repeat(5, minmax(0, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
         }
         .kpi {
           background: var(--surface);
@@ -120,25 +195,33 @@ def html_template(data)
           color: var(--accent-3);
         }
         .tabs {
-          margin-top: 14px;
-          display: flex;
+          margin-top: 12px;
+          display: grid;
           gap: 8px;
-          flex-wrap: wrap;
+          grid-template-columns: 1fr;
         }
         .tab-btn {
           border: 1px solid var(--line);
-          background: #e7f3ef;
+          background: #f1f8f5;
           color: var(--accent-3);
-          padding: 8px 12px;
-          border-radius: 999px;
-          font-size: 0.9rem;
+          padding: 10px 12px;
+          border-radius: 10px;
+          font-size: 0.88rem;
           font-weight: 600;
           cursor: pointer;
+          text-align: left;
+          width: 100%;
         }
         .tab-btn.active {
           background: var(--accent);
           color: #fff;
           border-color: var(--accent);
+        }
+        .tab-btn:focus-visible,
+        .quick-link:focus-visible,
+        .kpi.clickable:focus-visible {
+          outline: 3px solid #f59e0b;
+          outline-offset: 1px;
         }
         .panel {
           margin-top: 12px;
@@ -326,8 +409,19 @@ def html_template(data)
           color: var(--muted);
           font-size: 0.82rem;
         }
-        @media (max-width: 1150px) {
-          .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        @media (max-width: 1250px) {
+          .app-layout { grid-template-columns: 1fr; }
+          .nav-rail {
+            position: static;
+            margin-bottom: 10px;
+          }
+          .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+          .quick-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 760px) {
+          .tabs { grid-template-columns: 1fr; }
+          .quick-links { grid-template-columns: 1fr; }
+          .kpi-grid { grid-template-columns: 1fr; }
           .overview-grid { grid-template-columns: 1fr; }
           .controls { grid-template-columns: 1fr; }
           .agent-grid { grid-template-columns: 1fr; }
@@ -336,58 +430,74 @@ def html_template(data)
       </style>
     </head>
     <body>
+      <a class="skip-link" href="#mainContent">Skip to main content</a>
       <div class="wrap">
-        <section class="hero">
-          <h1>WGU MS Design for Business Innovation Dashboard</h1>
-          <p>Interactive program blueprint for a competency-based, fully online master's model with AI-Enabled Human-Centered Design Studio, embedded Agentic AI certificate, course architecture, and market alignment evidence.</p>
-        </section>
+        <div class="app-layout">
+          <aside class="nav-rail" aria-label="Dashboard navigation">
+            <h2 class="nav-title">Navigation</h2>
+            <p class="nav-copy">Open a section first, then use metric cards for labor and salary details.</p>
+            <div class="nav-group">
+              <h3 class="nav-section-title">Quick Jumps</h3>
+              <nav class="quick-links" aria-label="Page quick jumps">
+                <a class="quick-link" href="#programOverviewHero">Program Vision</a>
+                <a class="quick-link" href="#metricTiles">Employment and Salary Tiles</a>
+                <a class="quick-link" href="#metricExplorer">Metric Breakdown Explorer</a>
+              </nav>
+            </div>
+            <section class="tabs nav-group" role="tablist" aria-label="Program sections">
+              <h3 class="nav-section-title">Program Sections</h3>
+              <button id="tab-overview" class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-overview" tabindex="0" data-tab="overview">Overview</button>
+              <button id="tab-student" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-student" tabindex="-1" data-tab="student">Student Experience Vision</button>
+              <button id="tab-value" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-value" tabindex="-1" data-tab="value">Value to Students & Employers</button>
+              <button id="tab-workforce" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-workforce" tabindex="-1" data-tab="workforce">Workforce Alignment</button>
+              <button id="tab-courses" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-courses" tabindex="-1" data-tab="courses">Course Layout</button>
+              <button id="tab-skills" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-skills" tabindex="-1" data-tab="skills">Skills Library</button>
+              <button id="tab-competition" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-competition" tabindex="-1" data-tab="competition">Competitive Analysis</button>
+              <button id="tab-sources" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-sources" tabindex="-1" data-tab="sources">Sources</button>
+            </section>
+          </aside>
 
-        <section class="tabs">
-          <button class="tab-btn active" data-tab="overview">Overview</button>
-          <button class="tab-btn" data-tab="student">Student Experience Vision</button>
-          <button class="tab-btn" data-tab="value">Value to Students & Employers</button>
-          <button class="tab-btn" data-tab="workforce">Workforce Alignment</button>
-          <button class="tab-btn" data-tab="courses">Course Layout</button>
-          <button class="tab-btn" data-tab="skills">Skills Library</button>
-          <button class="tab-btn" data-tab="competition">Competitive Analysis</button>
-          <button class="tab-btn" data-tab="sources">Sources</button>
-        </section>
+          <main class="main-stage" id="mainContent">
+            <section class="hero" id="programOverviewHero">
+              <h1>WGU MS Design for Business Innovation Dashboard</h1>
+              <p>Interactive program blueprint for a competency-based, fully online master's model with AI-Enabled Human-Centered Design Studio, embedded Agentic AI certificate, course architecture, and market alignment evidence.</p>
+            </section>
 
-        <section class="kpi-grid">
-          <div class="kpi clickable" data-metric="overview" tabindex="0">
+            <section class="kpi-grid" id="metricTiles">
+          <div class="kpi clickable" data-metric="overview" role="button" aria-controls="metricExplorer" tabindex="0">
             <div class="k">Overview</div>
             <div class="v" id="kpiOverviewName">MS Design for Business Innovation</div>
             <div class="hint">Click for program overview summary</div>
           </div>
-          <div class="kpi clickable" data-metric="employment_2024" tabindex="0">
+          <div class="kpi clickable" data-metric="employment_2024" role="button" aria-controls="metricExplorer" tabindex="0">
             <div class="k">Employment (2024)</div>
             <div class="v" id="kpiEmployment2024">0</div>
             <div class="hint">Click for SOC breakdown</div>
           </div>
-          <div class="kpi clickable" data-metric="salary_range" tabindex="0">
+          <div class="kpi clickable" data-metric="salary_range" role="button" aria-controls="metricExplorer" tabindex="0">
             <div class="k">Salary Range</div>
             <div class="v" id="kpiSalaryRange">$0-$0</div>
             <div class="hint">Click for career breakdown</div>
           </div>
-          <div class="kpi clickable" data-metric="projected_2034" tabindex="0">
+          <div class="kpi clickable" data-metric="projected_2034" role="button" aria-controls="metricExplorer" tabindex="0">
             <div class="k">Projected (2034)</div>
             <div class="v" id="kpiProjected2034">0</div>
             <div class="hint">Click for SOC breakdown</div>
           </div>
-          <div class="kpi clickable" data-metric="annual_openings" tabindex="0">
+          <div class="kpi clickable" data-metric="annual_openings" role="button" aria-controls="metricExplorer" tabindex="0">
             <div class="k">Annual Openings (Avg)</div>
             <div class="v" id="kpiAnnualOpenings">0</div>
             <div class="hint">Click for SOC breakdown</div>
           </div>
-        </section>
+            </section>
 
-        <section class="metric-explorer">
+            <section class="metric-explorer" id="metricExplorer">
           <h2 id="topMetricTitle">Overview: MS Design for Business Innovation</h2>
           <div class="subtle" id="topMetricSubtitle">Click any top metric card to open its detailed breakdown.</div>
           <div id="topMetricTable"></div>
-        </section>
+            </section>
 
-        <section class="panel active" id="panel-overview">
+        <section class="panel active" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
           <h2>Program Vision Statement</h2>
           <div class="subtle">Credential: <span id="programName"></span> | Modality: <span id="programModality"></span> | Duration: <span id="programDuration"></span> months | Embedded Certificate: <span id="embeddedCert"></span><span id="agentLibraryLink"></span></div>
           <div class="box">
@@ -407,7 +517,7 @@ def html_template(data)
           </div>
         </section>
 
-        <section class="panel" id="panel-student">
+        <section class="panel" id="panel-student" role="tabpanel" aria-labelledby="tab-student" hidden>
           <h2>Student Experience Vision</h2>
           <div class="subtle">Built from the concept doc vision of a no-code, competency-based, portfolio-forward graduate experience.</div>
           <div class="box">
@@ -436,7 +546,7 @@ def html_template(data)
           </div>
         </section>
 
-        <section class="panel" id="panel-value">
+        <section class="panel" id="panel-value" role="tabpanel" aria-labelledby="tab-value" hidden>
           <h2>Value to Students & Employers</h2>
           <div class="subtle">Synthesized from concept-document value, role, and economic-opportunity sections.</div>
           <div class="overview-grid">
@@ -473,7 +583,7 @@ def html_template(data)
           </div>
         </section>
 
-        <section class="panel" id="panel-workforce">
+        <section class="panel" id="panel-workforce" role="tabpanel" aria-labelledby="tab-workforce" hidden>
           <h2>Workforce Alignment</h2>
           <div class="subtle" id="workforceSummary"></div>
           <div class="fact-grid">
@@ -549,7 +659,7 @@ def html_template(data)
           </div>
         </section>
 
-        <section class="panel" id="panel-courses">
+        <section class="panel" id="panel-courses" role="tabpanel" aria-labelledby="tab-courses" hidden>
           <h2>Course Layout, Competencies, and Tasks</h2>
           <div class="subtle">Filter by course, section, and search terms across competencies, skills, and AI-enabled task design.</div>
           <div class="controls">
@@ -592,7 +702,7 @@ def html_template(data)
           </div>
         </section>
 
-        <section class="panel" id="panel-skills">
+        <section class="panel" id="panel-skills" role="tabpanel" aria-labelledby="tab-skills" hidden>
           <h2>Skills Library</h2>
           <div class="subtle">Full skill inventory for all ten courses. Filter by course and domain.</div>
           <div class="controls" style="grid-template-columns: 1fr 1fr 1fr auto auto;">
@@ -632,7 +742,7 @@ def html_template(data)
           </div>
         </section>
 
-        <section class="panel" id="panel-competition">
+        <section class="panel" id="panel-competition" role="tabpanel" aria-labelledby="tab-competition" hidden>
           <h2>Competitive Program Analysis</h2>
           <div class="subtle">Full competitor set across direct degree competitors, adjacent design/innovation programs, AI certificate programs, and internal WGU adjacent offerings.</div>
           <div class="table-wrap">
@@ -656,7 +766,7 @@ def html_template(data)
           </div>
         </section>
 
-        <section class="panel" id="panel-sources">
+        <section class="panel" id="panel-sources" role="tabpanel" aria-labelledby="tab-sources" hidden>
           <h2>Reputable Source Set</h2>
           <div class="subtle">Primary source list used to design demand-aligned competencies and competitive positioning.</div>
           <div class="table-wrap">
@@ -675,7 +785,9 @@ def html_template(data)
           </div>
         </section>
 
-        <div class="foot">Generated on #{CGI.escapeHTML(data.dig('meta', 'generated_on').to_s)} for planning purposes. Validate tuition and format details with provider pages before publication.</div>
+            <div class="foot">Generated on #{CGI.escapeHTML(data.dig('meta', 'generated_on').to_s)} for planning purposes. Validate tuition and format details with provider pages before publication.</div>
+          </main>
+        </div>
       </div>
 
       <script id="program-data" type="application/json">#{json_payload}</script>
@@ -1163,23 +1275,71 @@ def html_template(data)
             $('wfOccupationRows').innerHTML = html;
           }
 
+          function activateTab(btn) {
+            if (!btn) return;
+            var btns = document.querySelectorAll('.tab-btn');
+            var panels = document.querySelectorAll('.panel');
+            var panelId = 'panel-' + btn.getAttribute('data-tab');
+            var panel = document.getElementById(panelId);
+            var j;
+
+            for (j = 0; j < btns.length; j++) {
+              removeClass(btns[j], 'active');
+              btns[j].setAttribute('aria-selected', 'false');
+              btns[j].setAttribute('tabindex', '-1');
+            }
+            for (j = 0; j < panels.length; j++) {
+              removeClass(panels[j], 'active');
+              panels[j].setAttribute('hidden', 'hidden');
+            }
+
+            addClass(btn, 'active');
+            btn.setAttribute('aria-selected', 'true');
+            btn.setAttribute('tabindex', '0');
+            if (panel) {
+              addClass(panel, 'active');
+              panel.removeAttribute('hidden');
+            }
+          }
+
+          function focusTab(buttons, index) {
+            if (!buttons.length) return;
+            var normalizedIndex = index;
+            if (normalizedIndex < 0) normalizedIndex = buttons.length - 1;
+            if (normalizedIndex >= buttons.length) normalizedIndex = 0;
+            buttons[normalizedIndex].focus();
+          }
+
           function initTabs() {
             var buttons = document.querySelectorAll('.tab-btn');
             var i;
             for (i = 0; i < buttons.length; i++) {
-              (function (btn) {
+              (function (btn, index) {
                 btn.addEventListener('click', function () {
-                  var btns = document.querySelectorAll('.tab-btn');
-                  var panels = document.querySelectorAll('.panel');
-                  var j;
-                  for (j = 0; j < btns.length; j++) removeClass(btns[j], 'active');
-                  for (j = 0; j < panels.length; j++) removeClass(panels[j], 'active');
-                  addClass(btn, 'active');
-                  var panelId = 'panel-' + btn.getAttribute('data-tab');
-                  addClass(document.getElementById(panelId), 'active');
+                  activateTab(btn);
                 });
-              })(buttons[i]);
+                btn.addEventListener('keydown', function (event) {
+                  var key = event.key;
+                  if (key === 'ArrowDown' || key === 'ArrowRight') {
+                    event.preventDefault();
+                    focusTab(buttons, index + 1);
+                  } else if (key === 'ArrowUp' || key === 'ArrowLeft') {
+                    event.preventDefault();
+                    focusTab(buttons, index - 1);
+                  } else if (key === 'Home') {
+                    event.preventDefault();
+                    focusTab(buttons, 0);
+                  } else if (key === 'End') {
+                    event.preventDefault();
+                    focusTab(buttons, buttons.length - 1);
+                  } else if (key === ' ' || key === 'Enter') {
+                    event.preventDefault();
+                    activateTab(btn);
+                  }
+                });
+              })(buttons[i], i);
             }
+            activateTab(document.querySelector('.tab-btn.active') || buttons[0]);
           }
 
           function initCourseFilters() {
