@@ -865,7 +865,8 @@ def html_template(data)
               var overviewName = (program.credential_name || 'MS in Design for Business Innovation').replace(/^MS in\\s+/i, 'MS ');
               var overviewDuration = program.expected_duration_months || '';
               var focusList = vision.vision_focus || [];
-              var highlights = program.value_proposition || [];
+              var highlights = vision.key_features_keywords || [];
+              if (!highlights.length) highlights = program.value_proposition || [];
               tableHtml = '<div class="overview-grid">' +
                 '<div class="box"><h3>Program Snapshot</h3><ul>' +
                   '<li><strong>Credential:</strong> ' + escapeHtml(overviewName) + '</li>' +
@@ -1015,7 +1016,8 @@ def html_template(data)
             }
             $('visionSignatureList').innerHTML = html;
 
-            var highlights = program.value_proposition || [];
+            var highlights = vision.key_features_keywords || [];
+            if (!highlights.length) highlights = program.value_proposition || [];
             html = '';
             for (i = 0; i < highlights.length; i++) {
               html += '<li>' + escapeHtml(highlights[i]) + '</li>';
