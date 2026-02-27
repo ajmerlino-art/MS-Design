@@ -144,6 +144,11 @@ def html_template(data)
           font-size: 0.98rem;
           color: var(--accent-3);
         }
+        .box p {
+          margin: 0;
+          font-size: 0.9rem;
+          line-height: 1.45;
+        }
         .market-list {
           display: grid;
           grid-template-columns: 1fr;
@@ -159,6 +164,35 @@ def html_template(data)
           font-weight: 700;
           margin-bottom: 4px;
           color: var(--accent-3);
+        }
+        .fact-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 10px;
+          margin-bottom: 10px;
+        }
+        .fact-card {
+          border: 1px solid var(--line);
+          border-radius: 12px;
+          padding: 10px;
+          background: #f9fcfb;
+        }
+        .fact-card .label {
+          font-size: 0.78rem;
+          text-transform: uppercase;
+          letter-spacing: 0.4px;
+          color: var(--muted);
+        }
+        .fact-card .value {
+          margin-top: 4px;
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: var(--accent-3);
+        }
+        .fact-card .detail {
+          margin-top: 4px;
+          font-size: 0.82rem;
+          color: var(--muted);
         }
         .pill {
           display: inline-block;
@@ -262,6 +296,7 @@ def html_template(data)
           .overview-grid { grid-template-columns: 1fr; }
           .controls { grid-template-columns: 1fr; }
           .agent-grid { grid-template-columns: 1fr; }
+          .fact-grid { grid-template-columns: 1fr; }
         }
       </style>
     </head>
@@ -282,6 +317,9 @@ def html_template(data)
 
         <section class="tabs">
           <button class="tab-btn active" data-tab="overview">Overview</button>
+          <button class="tab-btn" data-tab="student">Student Experience Vision</button>
+          <button class="tab-btn" data-tab="value">Value to Students & Employers</button>
+          <button class="tab-btn" data-tab="workforce">Workforce Alignment</button>
           <button class="tab-btn" data-tab="courses">Course Layout</button>
           <button class="tab-btn" data-tab="skills">Skills Library</button>
           <button class="tab-btn" data-tab="competition">Competitive Analysis</button>
@@ -289,20 +327,148 @@ def html_template(data)
         </section>
 
         <section class="panel active" id="panel-overview">
-          <h2>Program Snapshot</h2>
+          <h2>Program Vision Statement</h2>
           <div class="subtle">Credential: <span id="programName"></span> | Modality: <span id="programModality"></span> | Duration: <span id="programDuration"></span> months | Embedded Certificate: <span id="embeddedCert"></span><span id="agentLibraryLink"></span></div>
+          <div class="box">
+            <h3 id="visionHeadline"></h3>
+            <p id="visionStatement"></p>
+            <ul id="visionFocusList"></ul>
+          </div>
           <div class="overview-grid">
             <div class="box">
-              <h3>Value Proposition</h3>
-              <ul id="valueList"></ul>
+              <h3>Signature Elements</h3>
+              <ul id="visionSignatureList"></ul>
             </div>
             <div class="box">
               <h3>Delivery Model</h3>
               <ul id="deliveryList"></ul>
             </div>
           </div>
-          <h2 style="margin-top: 14px;">Market Demand Evidence</h2>
-          <div class="market-list" id="marketList"></div>
+        </section>
+
+        <section class="panel" id="panel-student">
+          <h2>Student Experience Vision</h2>
+          <div class="subtle">Built from the concept doc vision of a no-code, competency-based, portfolio-forward graduate experience.</div>
+          <div class="box">
+            <h3>Transformation Target</h3>
+            <p id="studentTransformation"></p>
+          </div>
+          <div class="overview-grid" style="margin-top: 10px;">
+            <div class="box">
+              <h3>Design Principles</h3>
+              <ul id="studentPrinciplesList"></ul>
+            </div>
+            <div class="box">
+              <h3>Studio Learning Modes</h3>
+              <ul id="studentStudioModesList"></ul>
+            </div>
+          </div>
+          <div class="overview-grid" style="margin-top: 10px;">
+            <div class="box">
+              <h3>Capstone Pathways</h3>
+              <ul id="studentCapstoneList"></ul>
+            </div>
+            <div class="box">
+              <h3>Support Ecosystem</h3>
+              <ul id="studentSupportList"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-value">
+          <h2>Value to Students & Employers</h2>
+          <div class="subtle">Synthesized from concept-document value, role, and economic-opportunity sections.</div>
+          <div class="overview-grid">
+            <div class="box">
+              <h3>Value to Students</h3>
+              <ul id="studentValueList"></ul>
+            </div>
+            <div class="box">
+              <h3>Value to Employers</h3>
+              <ul id="employerValueList"></ul>
+            </div>
+          </div>
+          <div class="overview-grid" style="margin-top: 10px;">
+            <div class="box">
+              <h3>Labor Signal Summary</h3>
+              <div class="market-list" id="valueSignalList"></div>
+            </div>
+            <div class="box">
+              <h3>Program Differentiation</h3>
+              <ul id="valueDiffList"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-workforce">
+          <h2>Workforce Alignment</h2>
+          <div class="subtle" id="workforceSummary"></div>
+          <div class="fact-grid">
+            <div class="fact-card">
+              <div class="label">Aligned Annual Openings</div>
+              <div class="value" id="wfTotalOpenings"></div>
+              <div class="detail">Across aligned BLS anchor occupations</div>
+            </div>
+            <div class="fact-card">
+              <div class="label">Adjacent Master’s Pipeline</div>
+              <div class="value" id="wfPipelineTotal"></div>
+              <div class="detail">NCES annual completions in feeder fields</div>
+            </div>
+            <div class="fact-card">
+              <div class="label">Primary Audience Segments</div>
+              <div class="value" id="wfAudienceCount"></div>
+              <div class="detail">Career changers and career advancers</div>
+            </div>
+          </div>
+
+          <div class="overview-grid">
+            <div class="box">
+              <h3>Serviceable Audience Signals</h3>
+              <div class="table-wrap">
+                <table style="min-width: 900px;">
+                  <thead>
+                    <tr>
+                      <th>Segment</th>
+                      <th>Employed (2023)</th>
+                      <th>Indicator</th>
+                      <th>Implication</th>
+                    </tr>
+                  </thead>
+                  <tbody id="wfAudienceRows"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="box">
+              <h3>Feeder Pipeline (NCES)</h3>
+              <div class="table-wrap">
+                <table style="min-width: 700px;">
+                  <thead>
+                    <tr>
+                      <th>Feeder Field</th>
+                      <th>Master’s Completions (2020-21)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="wfPipelineRows"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <h2 style="margin-top: 12px;">Primary Occupational Anchors</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>SOC</th>
+                  <th>Occupation</th>
+                  <th>Annual Openings</th>
+                  <th>Growth (2024-2034)</th>
+                  <th>Role Examples</th>
+                </tr>
+              </thead>
+              <tbody id="wfOccupationRows"></tbody>
+            </table>
+          </div>
         </section>
 
         <section class="panel" id="panel-courses">
@@ -503,7 +669,11 @@ def html_template(data)
                 market_demand: [],
                 sources: [],
                 competitive_programs: [],
-                program: { delivery_model: {}, value_proposition: [] }
+                program: { delivery_model: {}, value_proposition: [] },
+                program_vision: { vision_focus: [], signature_elements: [] },
+                student_experience_vision: { design_principles: [], studio_modes: [], capstone_pathways: [], support_ecosystem: [] },
+                value_to_students_employers: { student_value: [], employer_value: [], differentiation: [], labor_signal_summary: [] },
+                workforce_alignment: { audience_segments: [], feeder_pipeline: { fields: [] }, occupation_anchors: [] }
               };
             }
             try {
@@ -516,6 +686,10 @@ def html_template(data)
                 sources: [],
                 competitive_programs: [],
                 program: { delivery_model: {}, value_proposition: [] },
+                program_vision: { vision_focus: [], signature_elements: [] },
+                student_experience_vision: { design_principles: [], studio_modes: [], capstone_pathways: [], support_ecosystem: [] },
+                value_to_students_employers: { student_value: [], employer_value: [], differentiation: [], labor_signal_summary: [] },
+                workforce_alignment: { audience_segments: [], feeder_pipeline: { fields: [] }, occupation_anchors: [] },
                 _error: String(err && err.message ? err.message : err)
               };
             }
@@ -583,6 +757,7 @@ def html_template(data)
           function initOverview() {
             var program = DATA.program || {};
             var delivery = program.delivery_model || {};
+            var vision = DATA.program_vision || {};
             var embeddedCert = getEmbeddedCertificate();
             $('programName').innerHTML = escapeHtml(program.credential_name || '');
             $('programModality').innerHTML = escapeHtml(program.modality || '');
@@ -597,11 +772,22 @@ def html_template(data)
             }
 
             var i, html = '';
-            var valueProps = program.value_proposition || [];
-            for (i = 0; i < valueProps.length; i++) {
-              html += '<li>' + escapeHtml(valueProps[i]) + '</li>';
+            $('visionHeadline').innerHTML = escapeHtml(vision.headline || '');
+            $('visionStatement').innerHTML = escapeHtml(vision.statement || '');
+
+            var visionFocus = vision.vision_focus || [];
+            html = '';
+            for (i = 0; i < visionFocus.length; i++) {
+              html += '<li>' + escapeHtml(visionFocus[i]) + '</li>';
             }
-            $('valueList').innerHTML = html;
+            $('visionFocusList').innerHTML = html;
+
+            var signatureItems = vision.signature_elements || [];
+            html = '';
+            for (i = 0; i < signatureItems.length; i++) {
+              html += '<li>' + escapeHtml(signatureItems[i]) + '</li>';
+            }
+            $('visionSignatureList').innerHTML = html;
 
             var deliveryItems = [
               'Assessment type: ' + (delivery.assessment_type || ''),
@@ -613,24 +799,124 @@ def html_template(data)
               html += '<li>' + escapeHtml(deliveryItems[i]) + '</li>';
             }
             $('deliveryList').innerHTML = html;
+          }
 
-            var sourceMap = buildSourceMap();
-            var md = DATA.market_demand || [];
+          function initStudentVision() {
+            var studentVision = DATA.student_experience_vision || {};
+            $('studentTransformation').innerHTML = escapeHtml(studentVision.transformation || '');
+
+            var i, html = '';
+            var designPrinciples = studentVision.design_principles || [];
+            for (i = 0; i < designPrinciples.length; i++) {
+              html += '<li>' + escapeHtml(designPrinciples[i]) + '</li>';
+            }
+            $('studentPrinciplesList').innerHTML = html;
+
+            var studioModes = studentVision.studio_modes || [];
             html = '';
-            for (i = 0; i < md.length; i++) {
-              var m = md[i];
-              var source = sourceMap[m.source_id] || {};
-              var sourceLink = source.url
-                ? '<a href="' + escapeAttr(source.url) + '" target="_blank" rel="noopener">' + escapeHtml(source.title || m.source_id) + '</a>'
-                : escapeHtml(m.source_id);
+            for (i = 0; i < studioModes.length; i++) {
+              var mode = studioModes[i];
+              html += '<li><strong>' + escapeHtml(mode.mode || '') + ':</strong> ' + escapeHtml(mode.student_activity || '') + '</li>';
+            }
+            $('studentStudioModesList').innerHTML = html;
+
+            var capstonePathways = studentVision.capstone_pathways || [];
+            html = '';
+            for (i = 0; i < capstonePathways.length; i++) {
+              html += '<li>' + escapeHtml(capstonePathways[i]) + '</li>';
+            }
+            $('studentCapstoneList').innerHTML = html;
+
+            var supportEcosystem = studentVision.support_ecosystem || [];
+            html = '';
+            for (i = 0; i < supportEcosystem.length; i++) {
+              html += '<li>' + escapeHtml(supportEcosystem[i]) + '</li>';
+            }
+            $('studentSupportList').innerHTML = html;
+          }
+
+          function initValueToStudentsEmployers() {
+            var valueData = DATA.value_to_students_employers || {};
+            var i, html = '';
+
+            var studentValue = valueData.student_value || [];
+            for (i = 0; i < studentValue.length; i++) {
+              html += '<li>' + escapeHtml(studentValue[i]) + '</li>';
+            }
+            $('studentValueList').innerHTML = html;
+
+            var employerValue = valueData.employer_value || [];
+            html = '';
+            for (i = 0; i < employerValue.length; i++) {
+              html += '<li>' + escapeHtml(employerValue[i]) + '</li>';
+            }
+            $('employerValueList').innerHTML = html;
+
+            var laborSignals = valueData.labor_signal_summary || [];
+            html = '';
+            for (i = 0; i < laborSignals.length; i++) {
+              var signal = laborSignals[i];
               html += '<div class="market-item">' +
-                '<div class="theme">' + escapeHtml(m.theme) + '</div>' +
-                '<div style="margin-bottom:6px;">' + escapeHtml(m.evidence) + '</div>' +
-                '<div style="margin-bottom:6px;"><span class="pill">Program Implication</span> ' + escapeHtml(m.implication_for_program) + '</div>' +
-                '<div class="subtle" style="margin:0;">Source: ' + sourceLink + '</div>' +
+                '<div class="theme">' + escapeHtml(signal.signal || '') + '</div>' +
+                '<div style="margin-bottom:6px;"><strong>' + escapeHtml(signal.value || '') + '</strong></div>' +
+                '<div class="subtle" style="margin:0;">' + escapeHtml(signal.context || '') + '</div>' +
                 '</div>';
             }
-            $('marketList').innerHTML = html;
+            $('valueSignalList').innerHTML = html;
+
+            var differentiators = valueData.differentiation || [];
+            html = '';
+            for (i = 0; i < differentiators.length; i++) {
+              html += '<li>' + escapeHtml(differentiators[i]) + '</li>';
+            }
+            $('valueDiffList').innerHTML = html;
+          }
+
+          function initWorkforceAlignment() {
+            var workforce = DATA.workforce_alignment || {};
+            var pipeline = workforce.feeder_pipeline || {};
+            $('workforceSummary').innerHTML = escapeHtml(workforce.alignment_summary || '');
+            $('wfTotalOpenings').innerHTML = escapeHtml(workforce.total_annual_openings || '');
+            $('wfPipelineTotal').innerHTML = escapeHtml(pipeline.total_adjacent_masters_pipeline || '');
+            $('wfAudienceCount').innerHTML = String((workforce.audience_segments || []).length || 0);
+
+            var i, html = '';
+            var audienceRows = workforce.audience_segments || [];
+            for (i = 0; i < audienceRows.length; i++) {
+              var audience = audienceRows[i];
+              html += '<tr>' +
+                '<td>' + escapeHtml(audience.segment || '') + '</td>' +
+                '<td>' + escapeHtml(audience.employed_2023 || '') + '</td>' +
+                '<td>' + escapeHtml(audience.indicator || '') + '</td>' +
+                '<td>' + escapeHtml(audience.implication || '') + '</td>' +
+                '</tr>';
+            }
+            $('wfAudienceRows').innerHTML = html;
+
+            var pipelineRows = pipeline.fields || [];
+            html = '';
+            for (i = 0; i < pipelineRows.length; i++) {
+              var row = pipelineRows[i];
+              html += '<tr>' +
+                '<td>' + escapeHtml(row.field || '') + '</td>' +
+                '<td>' + escapeHtml(row.masters_completions_2020_21 || '') + '</td>' +
+                '</tr>';
+            }
+            $('wfPipelineRows').innerHTML = html;
+
+            var occupations = workforce.occupation_anchors || [];
+            html = '';
+            for (i = 0; i < occupations.length; i++) {
+              var occ = occupations[i];
+              html += '<tr>' +
+                '<td>' + escapeHtml(occ.soc || '') + '</td>' +
+                '<td>' + escapeHtml(occ.occupation || '') + '</td>' +
+                '<td>' + escapeHtml(occ.annual_openings || '') + '</td>' +
+                '<td>' + escapeHtml(occ.growth_2024_2034 || '') + '</td>' +
+                '<td>' + escapeHtml(occ.role_examples || '') + '</td>' +
+                '</tr>';
+            }
+            $('wfOccupationRows').innerHTML = html;
           }
 
           function initTabs() {
@@ -894,6 +1180,9 @@ def html_template(data)
             setKpis();
             initTabs();
             initOverview();
+            initStudentVision();
+            initValueToStudentsEmployers();
+            initWorkforceAlignment();
             initCourseFilters();
             renderCourseRows();
             initSkillFilters();

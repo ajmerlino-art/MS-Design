@@ -2666,5 +2666,220 @@
       "date": "2026",
       "url": "https://www.wgu.edu/about/story/cbe.html"
     }
-  ]
+  ],
+  "program_vision": {
+    "headline": "Turn creative capability into business innovation leadership through evidence-based, human-centered decisions.",
+    "statement": "The MS in Design for Business Innovation is a competency-based graduate program for creative and business-adjacent pathways, including BS Communications and BS UX Design graduates, who want to solve business problems through product, service, and experience innovation.",
+    "vision_focus": [
+      "Serve both advancing talent and stranded creative talent seeking stable, scalable organizational impact.",
+      "Build mastery in problem framing, applied research, evidence synthesis, decision quality, and cross-functional leadership.",
+      "Use an AI-Enabled Human-Centered Design Studio across every course to accelerate empathy, critique, and iteration while preserving human judgment.",
+      "Produce employer-facing portfolio evidence that demonstrates how decisions were made, defended, and prepared for implementation."
+    ],
+    "signature_elements": [
+      "Persistent AI-Enabled Human-Centered Design Studio embedded in every course",
+      "Industry Experts in Residence for milestone critiques, office hours, and portfolio readiness checks",
+      "Program and course learning communities with mentor continuity",
+      "Scaffolded portfolio artifacts that accumulate into a coherent decision-quality evidence set",
+      "Adobe-informed workforce simulations to keep business cases and constraints market-current"
+    ],
+    "source_basis": [
+      "Program Vision Statement (PVS)",
+      "Key Features",
+      "AI-Enabled Design Studio",
+      "Adobe Co-Build Partnership and Workforce Simulations"
+    ]
+  },
+  "student_experience_vision": {
+    "transformation": "Students transform from strong creative executors into innovation leaders who make defensible business decisions and show portable evidence of impact.",
+    "design_principles": [
+      "No-code by design: the program does not require interface programming and instead prioritizes judgment, research rigor, systems thinking, and influence.",
+      "Portfolio-first mastery: each course contributes employer-facing artifacts that show framing, evidence, trade-offs, and implementation logic.",
+      "Reliable experiential pathways: students complete equivalent applied pathways (workplace projects, sponsored projects, or high-fidelity simulations) rather than depending on one capstone sponsor.",
+      "Human + AI feedback ecosystem: always-on AI critique is paired with Industry Expert guidance for professional calibration."
+    ],
+    "studio_modes": [
+      {
+        "mode": "Critique Mode",
+        "student_activity": "Submit work-in-progress artifacts for structured critique aligned to competencies and industry standards."
+      },
+      {
+        "mode": "Q&A and Coaching Mode",
+        "student_activity": "Pressure-test assumptions, request examples, and clarify quality expectations before formal assessment."
+      },
+      {
+        "mode": "Iteration Tracking Mode",
+        "student_activity": "Document pivots and evidence progression to show development depth, not just final polish."
+      }
+    ],
+    "capstone_pathways": [
+      "Workplace project with confidentiality guardrails",
+      "Industry-sponsored project with external stakeholders",
+      "High-fidelity simulation mirroring real business constraints and decision conditions"
+    ],
+    "support_ecosystem": [
+      "Instructional Program Mentors lead program learning community continuity",
+      "Course Instructors reinforce depth and performance standards within each course",
+      "Industry Experts in Residence deliver live milestone critique and portfolio-readiness judgment"
+    ],
+    "source_basis": [
+      "Student Experience Vision",
+      "How the AI Design Studio Works Across Courses",
+      "Industry Experts in Residence: Bringing the Studio to Life"
+    ]
+  },
+  "value_to_students_employers": {
+    "student_value": [
+      "Progress into higher-scope roles where impact is measured by decision quality, service outcomes, and implementation readiness.",
+      "Build portable, employer-facing evidence instead of isolated class assignments.",
+      "Strengthen strategic and leadership capability above tool execution, including framing, synthesis, prioritization, and executive communication.",
+      "Apply AI agents in business-case contexts tied to the learner's degree pathway while maintaining human-centered and ethical controls."
+    ],
+    "employer_value": [
+      "Graduates arrive with proof of how they frame ambiguity, evaluate evidence, and defend recommendations.",
+      "Talent can contribute across service design, UX/research, strategy, operations, and innovation delivery functions.",
+      "Learners practice governance-aware AI usage, including risk mapping, human review, and implementation guardrails.",
+      "Portfolio artifacts reduce hiring ambiguity by showing repeatable innovation practices, not just polished outputs."
+    ],
+    "differentiation": [
+      "Distinct from typical HCI pathways by being intentionally no-code and leadership-oriented.",
+      "Distinct from generalized PM and marketing pathways by centering design-led innovation and evidence-to-decision workflows.",
+      "Delivers competency-based online rigor with scaffolded studio critique and external expert calibration."
+    ],
+    "labor_signal_summary": [
+      {
+        "signal": "Aligned occupational anchors",
+        "value": "10 BLS anchor groups",
+        "context": "Program outcomes map to service/experience design, UX/research, strategy, and innovation delivery leadership families."
+      },
+      {
+        "signal": "Average annual openings (aligned anchors)",
+        "value": "356,000",
+        "context": "Large annual renewal supports sustained placement opportunity across multiple role clusters."
+      },
+      {
+        "signal": "Highest-volume strategy/diagnosis anchor",
+        "value": "Management Analysts: 98,100 openings",
+        "context": "Supports design strategy, innovation strategy, and systems-level recommendation roles."
+      },
+      {
+        "signal": "Highest-volume research/insight anchor",
+        "value": "Market Research Analysts: 87,200 openings",
+        "context": "Supports UX/design research and insight translation pathways."
+      }
+    ],
+    "source_basis": [
+      "Value to Students & Employers",
+      "Economic Opportunity",
+      "Workforce Alignment"
+    ]
+  },
+  "workforce_alignment": {
+    "alignment_summary": "Workforce alignment is anchored to large BLS occupational families and adjacent NCES feeder pipelines, supporting both career changers and career advancers.",
+    "audience_segments": [
+      {
+        "segment": "Fine and performing arts degree holders (career changers)",
+        "employed_2023": "3,067,160",
+        "indicator": "20% in arts/media occupational group; 80% outside",
+        "implication": "Large pathway for re-entry into creativity through business-embedded innovation roles."
+      },
+      {
+        "segment": "Communications degree holders (career advancers)",
+        "employed_2023": "3,079,130",
+        "indicator": "Already distributed across business-facing occupational groups",
+        "implication": "Strong base for advancement into design-enabled strategy and leadership roles."
+      }
+    ],
+    "feeder_pipeline": {
+      "fields": [
+        {
+          "field": "Communication, journalism, and related programs",
+          "masters_completions_2020_21": "10,805"
+        },
+        {
+          "field": "Visual and performing arts",
+          "masters_completions_2020_21": "15,743"
+        }
+      ],
+      "total_adjacent_masters_pipeline": "26,548"
+    },
+    "occupation_anchors": [
+      {
+        "soc": "13-1111",
+        "occupation": "Management Analysts",
+        "annual_openings": "98,100",
+        "growth_2024_2034": "8.8%",
+        "role_examples": "Design Strategist, Innovation Strategist, Service Design Consultant"
+      },
+      {
+        "soc": "13-1161",
+        "occupation": "Market Research Analysts and Marketing Specialists",
+        "annual_openings": "87,200",
+        "growth_2024_2034": "6.7%",
+        "role_examples": "UX Researcher, Design Researcher, Customer Insights Lead"
+      },
+      {
+        "soc": "13-1082",
+        "occupation": "Project Management Specialists",
+        "annual_openings": "78,200",
+        "growth_2024_2034": "5.6%",
+        "role_examples": "Design Program Manager, Design Operations Manager, Experience Delivery Lead"
+      },
+      {
+        "soc": "11-2021",
+        "occupation": "Marketing Managers",
+        "annual_openings": "34,300",
+        "growth_2024_2034": "6.6%",
+        "role_examples": "Customer Journey Manager, Product and Service Innovation Manager"
+      },
+      {
+        "soc": "13-1121",
+        "occupation": "Meeting, Convention, and Event Planners",
+        "annual_openings": "15,500",
+        "growth_2024_2034": "4.8%",
+        "role_examples": "Event Experience Producer, Event Planner"
+      },
+      {
+        "soc": "27-3043",
+        "occupation": "Writers and Authors",
+        "annual_openings": "13,400",
+        "growth_2024_2034": "3.6%",
+        "role_examples": "Content Strategist, UX Content Strategist"
+      },
+      {
+        "soc": "27-1011",
+        "occupation": "Art Directors",
+        "annual_openings": "12,300",
+        "growth_2024_2034": "4.2%",
+        "role_examples": "Creative Director, Design Director, Creative Services Director"
+      },
+      {
+        "soc": "15-1255",
+        "occupation": "Web and Digital Interface Designers",
+        "annual_openings": "9,100",
+        "growth_2024_2034": "7.0%",
+        "role_examples": "Service Designer, Experience Designer, UX Designer, Product Designer"
+      },
+      {
+        "soc": "11-9081",
+        "occupation": "Lodging Managers",
+        "annual_openings": "5,400",
+        "growth_2024_2034": "3.4%",
+        "role_examples": "Guest Experience Manager, Guest Services Manager"
+      },
+      {
+        "soc": "27-1021",
+        "occupation": "Commercial and Industrial Designers",
+        "annual_openings": "2,500",
+        "growth_2024_2034": "3.2%",
+        "role_examples": "Industrial Designer, Product Designer (Physical Products)"
+      }
+    ],
+    "total_annual_openings": "356,000",
+    "source_basis": [
+      "Scalability",
+      "Value to Students & Employers",
+      "Workforce Alignment"
+    ]
+  }
 }
