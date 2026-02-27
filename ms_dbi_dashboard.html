@@ -385,8 +385,8 @@
           <ul id="visionSignatureList"></ul>
         </div>
         <div class="box">
-          <h3>Delivery Model</h3>
-          <ul id="deliveryList"></ul>
+          <h3>Program Highlights</h3>
+          <ul id="programHighlightsList"></ul>
         </div>
       </div>
     </section>
@@ -845,21 +845,22 @@
 
         if (metric === 'overview') {
           title = 'Overview: MS Design for Business Innovation';
-          subtitle = 'Interactive summary of the program overview, vision focus, and delivery model.';
+          subtitle = 'Interactive summary of the program overview, vision focus, and program highlights.';
           var overviewName = (program.credential_name || 'MS in Design for Business Innovation').replace(/^MS in\s+/i, 'MS ');
           var overviewDuration = program.expected_duration_months || '';
-          var delivery = program.delivery_model || {};
           var focusList = vision.vision_focus || [];
+          var highlights = program.value_proposition || [];
           tableHtml = '<div class="overview-grid">' +
             '<div class="box"><h3>Program Snapshot</h3><ul>' +
               '<li><strong>Credential:</strong> ' + escapeHtml(overviewName) + '</li>' +
               '<li><strong>Modality:</strong> ' + escapeHtml(program.modality || '') + '</li>' +
               '<li><strong>Expected duration:</strong> ' + escapeHtml(overviewDuration) + ' months</li>' +
             '</ul></div>' +
-            '<div class="box"><h3>Delivery Model</h3><ul>' +
-              '<li>' + escapeHtml('Assessment type: ' + (delivery.assessment_type || '')) + '</li>' +
-              '<li>' + escapeHtml('AI environment: ' + (delivery.ai_learning_environment || '')) + '</li>' +
-              '<li>' + escapeHtml('Support model: ' + (delivery.student_support || '')) + '</li>' +
+            '<div class="box"><h3>Program Highlights</h3><ul>';
+          for (i = 0; i < highlights.length; i++) {
+            tableHtml += '<li>' + escapeHtml(highlights[i]) + '</li>';
+          }
+          tableHtml +=
             '</ul></div>' +
             '</div>' +
             '<div class="box" style="margin-top:10px;"><h3>Vision Focus</h3><ul>';
@@ -966,7 +967,6 @@
 
       function initOverview() {
         var program = DATA.program || {};
-        var delivery = program.delivery_model || {};
         var vision = DATA.program_vision || {};
         var embeddedCert = getEmbeddedCertificate();
         $('programName').innerHTML = escapeHtml(program.credential_name || '');
@@ -999,16 +999,12 @@
         }
         $('visionSignatureList').innerHTML = html;
 
-        var deliveryItems = [
-          'Assessment type: ' + (delivery.assessment_type || ''),
-          'AI environment: ' + (delivery.ai_learning_environment || ''),
-          'Support model: ' + (delivery.student_support || '')
-        ];
+        var highlights = program.value_proposition || [];
         html = '';
-        for (i = 0; i < deliveryItems.length; i++) {
-          html += '<li>' + escapeHtml(deliveryItems[i]) + '</li>';
+        for (i = 0; i < highlights.length; i++) {
+          html += '<li>' + escapeHtml(highlights[i]) + '</li>';
         }
-        $('deliveryList').innerHTML = html;
+        $('programHighlightsList').innerHTML = html;
       }
 
       function initStudentVision() {
